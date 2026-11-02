@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { IconeCoracao, IconeCruz, IconeDot, IconeEstrela, IconeLocal } from "@/components/Icones";
 import { LinkExterno } from "@/components/LinkExterno";
 import { urlSegura } from "@/lib/format";
 import { CabecalhoPagina, TituloSecao, botao } from "@/components/Ui";
 import { getLinhaDoTempo, getSite } from "@/lib/data";
+import { CarrosselImagens } from "@/components/CarrosselImagens";
 
 export async function generateMetadata(): Promise<Metadata> {
   const site = await getSite();
@@ -19,6 +19,7 @@ const valores = [
 
 export default async function QuemSomosPage() {
   const [site, linhaDoTempo] = await Promise.all([getSite(), getLinhaDoTempo()]);
+  
   return (
     <>
       <CabecalhoPagina sobretitulo="Nossa história" titulo="Quem Somos" subtitulo="Uma comunidade que, como Maria, quer dizer “sim” a Deus todos os dias." />
@@ -39,10 +40,10 @@ export default async function QuemSomosPage() {
             </p>
           </div>
         </div>
-        <div className="relative aspect-4/5 overflow-hidden rounded-3xl shadow-xl ring-1 ring-mariano-100">
-          <Image src="/images/altar.png" alt="Altar da igreja com o crucifixo e tecidos roxos do tempo da Quaresma" fill
-            sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
-        </div>
+        
+        {/* Chamada para o novo componente Client-side */}
+        <CarrosselImagens />
+        
       </section>
 
       <section className="bg-mariano-50/70">

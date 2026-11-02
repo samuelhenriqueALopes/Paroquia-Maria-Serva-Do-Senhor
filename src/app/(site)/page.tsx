@@ -4,6 +4,7 @@ import { CartaoEvento, GradeHorarios, ListaAvisos } from "@/components/Blocos";
 import { IconeEstrela, IconeSetaDireita, iconesPastorais } from "@/components/Icones";
 import { TituloSecao, botao } from "@/components/Ui";
 import { getAvisos, getHorarios, getPastorais, getProximosEventos, getSite } from "@/lib/data";
+import { CarrosselImagens } from "@/components/CarrosselImagens";
 
 export default async function Home() {
   const [site, pastorais, horarios, avisos, eventos] = await Promise.all([
@@ -53,6 +54,29 @@ export default async function Home() {
         </div>
         <div className="mt-8">
           <GradeHorarios horarios={horarios} />
+        </div>
+      </section>
+
+      {/* Nossa Comunidade (Novo Carrossel Adaptado para Story) */}
+      <section className="mx-auto max-w-7xl px-6 pb-16">
+        <div className="grid items-center gap-10 md:grid-cols-2 lg:gap-16">
+          <div className="order-2 md:order-1 flex justify-center">
+            {/* max-w-md limita a largura no desktop para a imagem vertical não ficar exageradamente alta */}
+            <div className="w-full max-w-md">
+               <CarrosselImagens />
+            </div>
+          </div>
+          <div className="order-1 md:order-2">
+            <TituloSecao sobretitulo="Conheça" titulo="Nossa Comunidade" />
+            <p className="mt-5 text-tinta/80">
+              Somos uma família de fé que procura viver o Evangelho a cada dia. Organizamo-nos em torno da 
+              oração, da Eucaristia e do serviço, partilhando a alegria de pertencer a Cristo e de acolher quem 
+              chega.
+            </p>
+            <Link href="/quem-somos" className={`${botao.contorno} mt-8`}>
+              Nossa História e Valores
+            </Link>
+          </div>
         </div>
       </section>
 
