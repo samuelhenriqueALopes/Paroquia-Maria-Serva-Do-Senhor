@@ -12,16 +12,25 @@ export function BotaoExcluir({ acao, id, pergunta = "Excluir este item? Esta aç
   return (
     <form action={acao} onSubmit={(e) => { if (!confirm(pergunta)) e.preventDefault(); }}>
       <input type="hidden" name="id" value={id} />
-      <BotaoEnviar className={estilo.botaoPerigo} texto="Excluir" />
+      <BotaoEnviar className={estilo.botaoPerigo} texto="Excluir" textoPendente="Excluindo..." />
     </form>
   );
 }
 
-export function BotaoEnviar({ texto, className = estilo.botaoPrimario }: { texto: string; className?: string }) {
+export function BotaoEnviar({ 
+  texto, 
+  textoPendente = "Aguarde...", 
+  className = estilo.botaoPrimario 
+}: { 
+  texto: string; 
+  textoPendente?: string;
+  className?: string; 
+}) {
   const { pending } = useFormStatus();
+  
   return (
     <button type="submit" disabled={pending} className={className}>
-      {pending ? "Aguarde…" : texto}
+      {pending ? textoPendente : texto}
     </button>
   );
 }
