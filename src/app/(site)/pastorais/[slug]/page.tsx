@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
@@ -6,6 +7,7 @@ import { FormularioInscricao } from "@/components/FormularioInscricao";
 import { IconeCalendario, IconeCheck, IconeExterno, IconeSetaEsquerda, IconeWhatsapp, iconesPastorais } from "@/components/Icones";
 import { LinkExterno } from "@/components/LinkExterno";
 import { CabecalhoPagina, botao } from "@/components/Ui";
+import { fotosPastorais } from "@/content/fotos-pastorais";
 import { getPastoral, getPastorais } from "@/lib/data";
 import { linkWhatsapp, urlSegura } from "@/lib/format";
 
@@ -37,6 +39,7 @@ async function DetalhePastoral({ params }: Pick<PageProps<"/pastorais/[slug]">, 
   const Icone = iconesPastorais[p.icone];
   const whats = linkWhatsapp(p.whatsapp, p.mensagemWhatsapp);
   const formExterno = urlSegura(p.formularioExterno);
+  const foto = fotosPastorais[p.slug];
 
   return (
     <>
@@ -48,6 +51,12 @@ async function DetalhePastoral({ params }: Pick<PageProps<"/pastorais/[slug]">, 
 
       <section className="mx-auto grid max-w-7xl gap-12 px-6 py-10 lg:grid-cols-[1fr_28rem]">
         <div>
+          {foto ? (
+            <figure className="mb-8 overflow-hidden rounded-3xl shadow-xl ring-1 ring-mariano-100">
+              <Image src={foto.src} alt={foto.alt} width={foto.largura} height={foto.altura} priority
+                sizes="(min-width: 1024px) 60vw, 100vw" className="aspect-[4/3] w-full object-cover object-bottom" />
+            </figure>
+          ) : null}
           <span className="grid size-14 place-items-center rounded-full bg-mariano-900 text-ouro-300">
             <Icone className="size-7" />
           </span>

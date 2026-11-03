@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { GradeHorarios, ListaAvisos } from "@/components/Blocos";
 import { CabecalhoPagina, TituloSecao } from "@/components/Ui";
 import { getAvisos, getHorarios, getSite } from "@/lib/data";
@@ -26,11 +27,21 @@ export default async function MissasPage() {
       </section>
 
       <section id="avisos" className="bg-mariano-50/70">
-        <div className="mx-auto max-w-3xl px-6 py-16">
-          <TituloSecao sobretitulo="Comunicados" titulo="Avisos" />
-          <div className="mt-8">
-            <ListaAvisos avisos={avisos} />
+        <div className="mx-auto grid max-w-6xl items-start gap-12 px-6 py-16 lg:grid-cols-[1fr_20rem]">
+          <div>
+            <TituloSecao sobretitulo="Comunicados" titulo="Avisos" />
+            <div className="mt-8">
+              <ListaAvisos avisos={avisos} />
+            </div>
           </div>
+          <figure className="relative mx-auto w-full max-w-xs overflow-hidden rounded-3xl shadow-xl ring-1 ring-mariano-100 lg:sticky lg:top-32">
+            <Image src="/images/cruz-ramos.webp" alt="Ramos diante do crucifixo do altar, envolto em tecido roxo" width={720} height={1280}
+              sizes="20rem" className="aspect-[3/4] w-full object-cover object-[50%_60%]" />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-roxo-900/90 to-transparent px-5 pb-5 pt-16 text-white">
+              <p className="font-serif text-xl italic leading-snug">“Bendito o que vem em nome do Senhor!”</p>
+              <p className="mt-1 text-xs font-semibold text-ouro-300">Mt 21,9</p>
+            </figcaption>
+          </figure>
         </div>
       </section>
     </>
